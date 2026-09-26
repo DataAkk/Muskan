@@ -1,25 +1,59 @@
-<div class="question">
-  <h2>Hi Muskan 🧸</h2>
+<div class="beautiful-section">
 
-  <p>One very important question... 👀</p>
+  <h2>Muskan, how are you? 👀🧸</h2>
 
-  <h2>How are you? 😂</h2>
+  <div class="word">
+    <span>🧸 B</span>
+    <span>🧸 E</span>
+    <span>🧸 A</span>
+    <span>🧸 U</span>
+    <span>🧸 T</span>
+    <span>🧸 I</span>
+    <span>🧸 F</span>
+    <span>🧸 U</span>
+    <span>🧸 L</span>
+  </div>
 
-  <button onclick="chooseAnswer('Beautiful')">
-    1. Beautiful ✨
-  </button>
-
-  <button onclick="chooseAnswer('Pretty')">
-    2. Pretty 💕
-  </button>
-
-  <div id="answer"></div>
 </div>
 
-<script>
-function chooseAnswer(choice) {
-  document.getElementById("answer").innerHTML =
-    "Correct answer, Muskan! 😂🧸<br><br>" +
-    "Actually... both options were correct. 😌✨";
+<style>
+.beautiful-section {
+  text-align: center;
 }
-</script>
+
+.word {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.word span {
+  display: inline-block;
+  font-size: 24px;
+  padding: 12px;
+  background: #fff0f5;
+  border-radius: 15px;
+  animation: catch 1.5s infinite alternate;
+}
+
+.word span:nth-child(2) { animation-delay: .1s; }
+.word span:nth-child(3) { animation-delay: .2s; }
+.word span:nth-child(4) { animation-delay: .3s; }
+.word span:nth-child(5) { animation-delay: .4s; }
+.word span:nth-child(6) { animation-delay: .5s; }
+.word span:nth-child(7) { animation-delay: .6s; }
+.word span:nth-child(8) { animation-delay: .7s; }
+.word span:nth-child(9) { animation-delay: .8s; }
+
+@keyframes catch {
+  from {
+    transform: translateY(0) rotate(-5deg);
+  }
+
+  to {
+    transform: translateY(-15px) rotate(5deg);
+  }
+}
+</style>

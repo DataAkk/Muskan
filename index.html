@@ -1,59 +1,304 @@
-<div class="beautiful-section">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catch Beautiful 🧸</title>
 
-  <h2>Muskan, how are you? 👀🧸</h2>
+<style>
+* {
+    box-sizing: border-box;
+}
 
-  <div class="word">
-    <span>🧸 B</span>
-    <span>🧸 E</span>
-    <span>🧸 A</span>
-    <span>🧸 U</span>
-    <span>🧸 T</span>
-    <span>🧸 I</span>
-    <span>🧸 F</span>
-    <span>🧸 U</span>
-    <span>🧸 L</span>
-  </div>
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffd6e7, #fff3f8);
+    height: 100vh;
+    user-select: none;
+}
+
+#startScreen,
+#winScreen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #ffd6e7, #fff3f8);
+    z-index: 10;
+}
+
+.box {
+    background: white;
+    padding: 35px 25px;
+    border-radius: 30px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+h1 {
+    color: #e75480;
+}
+
+.teddy {
+    font-size: 75px;
+}
+
+button {
+    border: none;
+    background: #e75480;
+    color: white;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+#game {
+    display: none;
+    height: 100vh;
+    position: relative;
+}
+
+#top {
+    text-align: center;
+    padding-top: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+#top h2 {
+    margin: 5px;
+    color: #e75480;
+}
+
+#score {
+    font-weight: bold;
+}
+
+#target {
+    position: absolute;
+    padding: 15px 22px;
+    border-radius: 50px;
+    background: #ff5c8a;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: left 0.25s, top 0.25s;
+    z-index: 5;
+}
+
+.bear {
+    position: absolute;
+    font-size: 42px;
+    pointer-events: none;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+#winScreen {
+    display: none;
+}
+
+.small {
+    color: #666;
+}
+</style>
+</head>
+
+<body>
+
+<!-- START SCREEN -->
+<div id="startScreen">
+    <div class="box">
+        <div class="teddy">🧸</div>
+
+        <h1>Hey Muskan! 👀</h1>
+
+        <p>
+            The teddy bears have a very important mission...
+        </p>
+
+        <h2>Catch "Beautiful" ✨</h2>
+
+        <p class="small">
+            It will try to escape. 😂<br>
+            Don't let it!
+        </p>
+
+        <button onclick="startGame()">
+            Start Game 🧸
+        </button>
+    </div>
+</div>
+
+
+<!-- GAME -->
+<div id="game">
+
+    <div id="top">
+        <h2>🧸 Catch Beautiful! 🧸</h2>
+        <div id="score">Caught: 0 / 5</div>
+    </div>
+
+    <div id="target" onclick="catchBeautiful()">
+        BEAUTIFUL ✨
+    </div>
 
 </div>
 
-<style>
-.beautiful-section {
-  text-align: center;
+
+<!-- WIN SCREEN -->
+<div id="winScreen">
+    <div class="box">
+
+        <div class="teddy">🧸🧸🧸</div>
+
+        <h1>YOU CAUGHT IT! 😂</h1>
+
+        <p>
+            The teddy bears finally caught
+            <strong>BEAUTIFUL</strong>.
+        </p>
+
+        <h2>But there is a problem... 👀</h2>
+
+        <p>
+            We already knew the answer. 😌
+        </p>
+
+        <h2>
+            Beautiful AND Pretty. ✨
+        </h2>
+
+        <p>
+            Don't blame the game. 🧸😂
+        </p>
+
+        <button onclick="location.reload()">
+            Play Again 🔄
+        </button>
+
+    </div>
+</div>
+
+
+<script>
+
+let score = 0;
+let gameRunning = false;
+
+const target = document.getElementById("target");
+const game = document.getElementById("game");
+const scoreText = document.getElementById("score");
+
+
+function startGame() {
+
+    document.getElementById("startScreen").style.display = "none";
+    game.style.display = "block";
+
+    gameRunning = true;
+
+    createBears();
+
+    moveTarget();
 }
 
-.word {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 25px;
+
+/* MOVE BEAUTIFUL */
+
+function moveTarget() {
+
+    if (!gameRunning) return;
+
+    const maxX = window.innerWidth - target.offsetWidth - 10;
+    const maxY = window.innerHeight - target.offsetHeight - 10;
+
+    const x = Math.random() * maxX;
+    const y = 80 + Math.random() * (maxY - 80);
+
+    target.style.left = x + "px";
+    target.style.top = y + "px";
 }
 
-.word span {
-  display: inline-block;
-  font-size: 24px;
-  padding: 12px;
-  background: #fff0f5;
-  border-radius: 15px;
-  animation: catch 1.5s infinite alternate;
+
+/* CATCH IT */
+
+function catchBeautiful() {
+
+    score++;
+
+    scoreText.innerHTML =
+        "Caught: " + score + " / 5";
+
+    if (score >= 5) {
+
+        gameRunning = false;
+
+        game.style.display = "none";
+        document.getElementById("winScreen").style.display = "flex";
+
+        return;
+    }
+
+    moveTarget();
 }
 
-.word span:nth-child(2) { animation-delay: .1s; }
-.word span:nth-child(3) { animation-delay: .2s; }
-.word span:nth-child(4) { animation-delay: .3s; }
-.word span:nth-child(5) { animation-delay: .4s; }
-.word span:nth-child(6) { animation-delay: .5s; }
-.word span:nth-child(7) { animation-delay: .6s; }
-.word span:nth-child(8) { animation-delay: .7s; }
-.word span:nth-child(9) { animation-delay: .8s; }
 
-@keyframes catch {
-  from {
-    transform: translateY(0) rotate(-5deg);
-  }
+/* TEDDY BEARS */
 
-  to {
-    transform: translateY(-15px) rotate(5deg);
-  }
+function createBears() {
+
+    const bears = ["🧸","🧸","🧸","🧸","🧸","🧸"];
+
+    bears.forEach((emoji, index) => {
+
+        const bear = document.createElement("div");
+
+        bear.className = "bear";
+        bear.innerHTML = emoji;
+
+        bear.style.left =
+            Math.random() * 90 + "%";
+
+        bear.style.top =
+            15 + Math.random() * 75 + "%";
+
+        bear.style.animationDelay =
+            Math.random() * 2 + "s";
+
+        game.appendChild(bear);
+    });
 }
-</style>
+
+
+/* MAKE IT MOVE AUTOMATICALLY */
+
+setInterval(() => {
+
+    if (gameRunning) {
+        moveTarget();
+    }
+
+}, 1200);
+
+</script>
+
+</body>
+</html>

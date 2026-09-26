@@ -1,0 +1,25 @@
+<div class="question">
+  <h2>Hi Muskan 🧸</h2>
+
+  <p>One very important question... 👀</p>
+
+  <h2>How are you? 😂</h2>
+
+  <button onclick="chooseAnswer('Beautiful')">
+    1. Beautiful ✨
+  </button>
+
+  <button onclick="chooseAnswer('Pretty')">
+    2. Pretty 💕
+  </button>
+
+  <div id="answer"></div>
+</div>
+
+<script>
+function chooseAnswer(choice) {
+  document.getElementById("answer").innerHTML =
+    "Correct answer, Muskan! 😂🧸<br><br>" +
+    "Actually... both options were correct. 😌✨";
+}
+</script>
